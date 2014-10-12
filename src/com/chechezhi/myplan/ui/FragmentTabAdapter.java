@@ -1,4 +1,4 @@
-package com.chechezhi.myplan;
+package com.chechezhi.myplan.ui;
 
 import java.util.ArrayList;
 

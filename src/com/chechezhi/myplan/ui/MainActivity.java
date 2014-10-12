@@ -1,4 +1,8 @@
-package com.chechezhi.myplan;
+package com.chechezhi.myplan.ui;
+
+import com.chechezhi.myplan.R;
+import com.chechezhi.myplan.R.id;
+import com.chechezhi.myplan.R.string;
 
 import android.app.ActionBar;
 import android.os.Bundle;

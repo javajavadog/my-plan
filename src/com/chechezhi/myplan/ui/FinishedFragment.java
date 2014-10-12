@@ -1,4 +1,7 @@
-package com.chechezhi.myplan;
+package com.chechezhi.myplan.ui;
+
+import com.chechezhi.myplan.R;
+import com.chechezhi.myplan.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
