@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">My Plan</string>
+    <string name="todo_list">TODO List</string>
+    <string name="finished_list">Finished List</string>
+    <string name="add_plan">Add a plan</string>
 </resources>

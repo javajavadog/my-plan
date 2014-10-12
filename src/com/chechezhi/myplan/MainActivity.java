@@ -4,8 +4,11 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity {
+    private static final int MENU_ID_ADD_PLAN = 0;
     private ViewPager mViewPager;
     private FragmentTabAdapter mTabsAdapter;
 
@@ -20,13 +23,11 @@ public class MainActivity extends FragmentActivity {
 
         final ActionBar bar = getActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
+        bar.setDisplayOptions(0, ActionBar.NAVIGATION_MODE_LIST);
 
         mTabsAdapter = new FragmentTabAdapter(this, mViewPager);
-        mTabsAdapter.addTab(bar.newTab().setText("TODO List"),
-                TodoFragment.class, null);
-        mTabsAdapter.addTab(bar.newTab().setText("Finished List"),
-                FinishedFragment.class, null);
+        mTabsAdapter.addTab(bar.newTab().setText(getString(R.string.todo_list)), TodoFragment.class, null);
+        mTabsAdapter.addTab(bar.newTab().setText(getString(R.string.finished_list)), FinishedFragment.class, null);
 
         if (savedInstanceState != null) {
             bar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
@@ -38,4 +39,26 @@ public class MainActivity extends FragmentActivity {
         super.onSaveInstanceState(outState);
         outState.putInt("tab", getActionBar().getSelectedNavigationIndex());
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem actionItem = menu.add(0, MENU_ID_ADD_PLAN, 0, R.string.add_plan);
+        actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+        case MENU_ID_ADD_PLAN:
+
+            break;
+
+        default:
+            break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
