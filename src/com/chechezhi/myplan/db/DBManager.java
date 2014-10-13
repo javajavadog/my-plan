@@ -78,7 +78,17 @@ public class DBManager {
         Cursor c = db.query(DBHelper.DB_TABLE_NAME, new String[] { "_id", DBHelper.DB_COLUMN_TITLE,
                         DBHelper.DB_COLUMN_CONTENT, DBHelper.DB_COLUMN_CREATE_DATE,
                         DBHelper.DB_COLUMN_MODIFICATION_DATE, DBHelper.DB_COLUMN_FINISHED, DBHelper.DB_COLUMN_DES },
-                        "_id = " + id + "", null, null, null, null);
+                        "_id = " + id, null, null, null, null);
         return c;
+    }
+    
+    public Cursor query(String where){
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+        Cursor c = db.query(DBHelper.DB_TABLE_NAME, new String[] { "_id", DBHelper.DB_COLUMN_TITLE,
+                        DBHelper.DB_COLUMN_CONTENT, DBHelper.DB_COLUMN_CREATE_DATE,
+                        DBHelper.DB_COLUMN_MODIFICATION_DATE, DBHelper.DB_COLUMN_FINISHED, DBHelper.DB_COLUMN_DES },
+                        where, null, null, null, null);
+        return c;
+        
     }
 }

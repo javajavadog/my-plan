@@ -29,7 +29,7 @@ public class TodoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View whole = inflater.inflate(R.layout.fragment_todo, null);
 
-        Cursor c = DBManager.getInstance(getActivity()).query();
+        Cursor c = DBManager.getInstance(getActivity()).query(DBHelper.DB_COLUMN_FINISHED + " = 0");
         
         mAdapter = new TodoAdapter(getActivity(), c, true);
 
@@ -52,7 +52,7 @@ public class TodoFragment extends Fragment {
     }
     
     public void notifyListChange(){
-        Cursor c = DBManager.getInstance(getActivity()).query();
+        Cursor c = DBManager.getInstance(getActivity()).query(DBHelper.DB_COLUMN_FINISHED + " = 0");
         mAdapter.changeCursor(c);
         mAdapter.notifyDataSetChanged();
     }

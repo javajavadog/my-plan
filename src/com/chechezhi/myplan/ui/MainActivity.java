@@ -73,6 +73,9 @@ public class MainActivity extends FragmentActivity {
             if (fragment instanceof TodoFragment) {
                 ((TodoFragment) fragment).notifyListChange();
             }
+            if (fragment instanceof FinishedFragment) {
+                ((FinishedFragment) fragment).notifyListChange();
+            }
         }
     }
 
