@@ -1,6 +1,7 @@
 package com.chechezhi.myplan.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -17,7 +18,9 @@ public class FragmentTabAdapter extends FragmentPagerAdapter implements ActionBa
     private final ActionBar mActionBar;
     private final ViewPager mViewPager;
     private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
-
+    
+    private List<Fragment> mAllFragment = new ArrayList<Fragment>();
+    
     static final class TabInfo {
         private final Class<?> clss;
         private final Bundle args;
@@ -54,8 +57,14 @@ public class FragmentTabAdapter extends FragmentPagerAdapter implements ActionBa
     @Override
     public Fragment getItem(int position) {
         TabInfo info = mTabs.get(position);
-        return Fragment.instantiate(mContext, info.clss.getName(), info.args);
+        Fragment instantiate = Fragment.instantiate(mContext, info.clss.getName(), info.args);
+        mAllFragment.add(instantiate);
+        return instantiate;
     }
+    
+    public List<Fragment> getAllFragment(){
+        return mAllFragment;
+    };
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -75,7 +84,7 @@ public class FragmentTabAdapter extends FragmentPagerAdapter implements ActionBa
         Object tag = tab.getTag();
         for (int i = 0; i < mTabs.size(); i++) {
             if (mTabs.get(i) == tag) {
-                mViewPager.setCurrentItem(i);
+                mViewPager.setCurrentItem(i, true);
             }
         }
     }

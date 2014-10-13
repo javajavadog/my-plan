@@ -1,14 +1,14 @@
 package com.chechezhi.myplan.ui;
 
+import java.util.List;
+
 import android.app.ActionBar;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.chechezhi.myplan.R;
 
@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity {
         mTabsAdapter = new FragmentTabAdapter(this, mViewPager);
         mTabsAdapter.addTab(bar.newTab().setText(getString(R.string.todo_list)), TodoFragment.class, null);
         mTabsAdapter.addTab(bar.newTab().setText(getString(R.string.finished_list)), FinishedFragment.class, null);
-
+        
         if (savedInstanceState != null) {
             bar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
         }
@@ -60,7 +60,6 @@ public class MainActivity extends FragmentActivity {
             AddPlanFragment f = new AddPlanFragment();
             f.show(getSupportFragmentManager(), "Add Plan");
             break;
-
         default:
             break;
         }
@@ -68,8 +67,13 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void notifyDataChange() {
-        // TODO Auto-generated method stub
-        
+        List<Fragment> list = mTabsAdapter.getAllFragment();
+        for (int i = 0; i < list.size(); i++) {
+            Fragment fragment = list.get(i);
+            if (fragment instanceof TodoFragment) {
+                ((TodoFragment) fragment).notifyListChange();
+            }
+        }
     }
 
 }

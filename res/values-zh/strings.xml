@@ -8,4 +8,6 @@
     <string name="cancel">取消</string>
     <string name="added">新计划已添加</string>
     <string name="add_failed">添加失败</string>
+    <string name="todo_item">待完成</string>
+    <string name="finished_item">已完成</string>
 </resources>

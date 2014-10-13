@@ -40,7 +40,7 @@ public class AddPlanFragment extends DialogFragment {
                 } else {
                     Toast.makeText(getActivity(), R.string.add_failed, Toast.LENGTH_SHORT).show();
                 }
-                ((MainActivity)getActivity()).notifyDataChange();
+                ((MainActivity) getActivity()).notifyDataChange();
             }
         });
         whole.findViewById(R.id.btn_cancel).setOnClickListener(new OnClickListener() {

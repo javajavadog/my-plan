@@ -8,4 +8,6 @@
     <string name="cancel">Cancel</string>
     <string name="added">New plan added</string>
     <string name="add_failed">Failed add plan</string>
+    <string name="todo_item">TODO</string>
+    <string name="finished_item">Finished</string>
 </resources>
