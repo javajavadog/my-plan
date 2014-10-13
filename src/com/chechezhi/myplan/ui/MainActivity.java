@@ -1,15 +1,16 @@
 package com.chechezhi.myplan.ui;
 
-import com.chechezhi.myplan.R;
-import com.chechezhi.myplan.R.id;
-import com.chechezhi.myplan.R.string;
-
 import android.app.ActionBar;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.chechezhi.myplan.R;
 
 public class MainActivity extends FragmentActivity {
     private static final int MENU_ID_ADD_PLAN = 0;
@@ -56,13 +57,19 @@ public class MainActivity extends FragmentActivity {
         int itemId = item.getItemId();
         switch (itemId) {
         case MENU_ID_ADD_PLAN:
-
+            AddPlanFragment f = new AddPlanFragment();
+            f.show(getSupportFragmentManager(), "Add Plan");
             break;
 
         default:
             break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void notifyDataChange() {
+        // TODO Auto-generated method stub
+        
     }
 
 }
