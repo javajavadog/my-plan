@@ -4,10 +4,17 @@
     <string name="todo_list">计划列表</string>
     <string name="finished_list">已完成列表</string>
     <string name="add_plan">添加计划</string>
+    <string name="edit_plan">编辑计划</string>
     <string name="add">添加</string>
     <string name="cancel">取消</string>
     <string name="added">新计划已添加</string>
-    <string name="add_failed">添加失败</string>
+    <string name="add_failed">添加失败!</string>
     <string name="todo_item">待完成</string>
     <string name="finished_item">已完成</string>
+    <string name="created_at">创建于</string>
+    <string name="modify">修改</string>
+    <string name="delete">删除</string>
+    <string name="deleted">已删除</string>
+    <string name="delete_failed">删除失败!</string>
+    <string name="finished">已完成</string>
 </resources>

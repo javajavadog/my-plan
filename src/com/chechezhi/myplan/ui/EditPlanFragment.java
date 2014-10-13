@@ -1,5 +1,6 @@
 package com.chechezhi.myplan.ui;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -10,22 +11,37 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.chechezhi.myplan.R;
+import com.chechezhi.myplan.db.DBHelper;
 import com.chechezhi.myplan.db.DBManager;
 
-public class AddPlanFragment extends DialogFragment {
+public class EditPlanFragment extends DialogFragment {
     private EditText mPlanContent;
+    private int mId;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        mId = getArguments().getInt("KEY_DATABASE_ID");
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View whole = inflater.inflate(R.layout.fragment_add_plan, null);
+        View whole = inflater.inflate(R.layout.fragment_edit_plan, null);
+        
+        Cursor cursor = DBManager.getInstance(getActivity()).query(mId);
+        cursor.moveToNext();
+        String title = cursor.getString(cursor.getColumnIndex(DBHelper.DB_COLUMN_TITLE));
+        cursor.close();
+        
         mPlanContent = (EditText) whole.findViewById(R.id.add_plan_edit);
-        whole.findViewById(R.id.btn_add).setOnClickListener(new OnClickListener() {
+        mPlanContent.setText(title);
+        
+        whole.findViewById(R.id.btn_modify).setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 DBManager dbManager = DBManager.getInstance(getActivity());
                 String content = mPlanContent.getText().toString();
-                content = content.trim();
 
                 DBManager.Record r = new DBManager.Record();
                 r.content = content;
@@ -34,7 +50,7 @@ public class AddPlanFragment extends DialogFragment {
                 r.finished = 0;
                 r.modificationDate = -1;
                 r.title = content;
-                long result = dbManager.add(r);
+                long result = dbManager.update(mId, r);
                 dismiss();
                 if (result > 0) {
                     Toast.makeText(getActivity(), R.string.added, Toast.LENGTH_SHORT).show();
@@ -51,7 +67,21 @@ public class AddPlanFragment extends DialogFragment {
                 dismiss();
             }
         });
-        getDialog().setTitle(R.string.add_plan);
+        
+        whole.findViewById(R.id.btn_delete).setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                if(DBManager.getInstance(getActivity()).delete(mId) > 0){
+                    Toast.makeText(getActivity(), R.string.deleted, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), R.string.delete_failed, Toast.LENGTH_SHORT).show();
+                }
+                ((MainActivity) getActivity()).notifyDataChange();
+            }
+        });
+        getDialog().setTitle(R.string.edit_plan);
         return whole;
     }
 
